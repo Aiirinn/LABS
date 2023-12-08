@@ -21,7 +21,7 @@ public class UnitTest1
 
                 Title = "Shadow Fight",
                 Author = "Chuck Palanik",
-                Genre = "Thriller",
+                Genres = new List<string>{"Thriller", "Rofls"},
                 PublicationDate = new DateTime(1234, 12, 13),
                 Annotation = "jfaiofaiowfnioajf",
                 ISBN = "93290173"
@@ -30,7 +30,7 @@ public class UnitTest1
             {
                 Title = "Fight Club",
                 Author = "Chuck Palanik",
-                Genre = "Thriller",
+                Genres = new List<string>{"Thriller"},
                 PublicationDate = new DateTime(1234, 12, 13),
                 Annotation = "bro fight jfaiofaiowfnioajf",
                 ISBN = "93290173"
@@ -78,7 +78,7 @@ public class UnitTest1
 
                 Title = "Shadow Fight",
                 Author = "Chuck Palanik",
-                Genre = "Psycho",
+                Genres = new List<string>{"Psycho"},
                 PublicationDate = new DateTime(1234, 12, 13),
                 Annotation = "jfaiofaiowfnioajf",
                 ISBN = "93290173"
@@ -87,7 +87,7 @@ public class UnitTest1
             {
                 Title = "Fight Club",
                 Author = "Chuck Palanik",
-                Genre = "Thriller",
+                Genres = new List<string>{"Thriller"},
                 PublicationDate = new DateTime(1234, 12, 13),
                 Annotation = "bro fight jfaiofaiowfnioajf",
                 ISBN = "93290173"
