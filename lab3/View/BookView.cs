@@ -9,7 +9,7 @@ public class BookView:IBookView
     {
         foreach (var book in books)
         {
-            Console.WriteLine($"Название: {book.Title}; Автор: {book.Author}; Жанры: {String.Join(", ", book.Genre)}; Дата публикации:" +
+            Console.WriteLine($"Название: {book.Title}; Автор: {book.Author}; Жанры: {String.Join(", ", book.Genres)}; Дата публикации:" +
                               $" {book.PublicationDate}; Аннотация: {book.Annotation}; ISBN: {book.ISBN}");
         }
     }
@@ -25,7 +25,7 @@ public class BookView:IBookView
                     var annot = "";
                     if (sortedBook.IsKeywordInAnnotation)
                         annot = "Ключевое слово найдено в аннотации!";
-                    Console.WriteLine($"Название: {book.Title}; Автор: {book.Author}; Жанры: {book.Genre}; Дата публикации:" +
+                    Console.WriteLine($"Название: {book.Title}; Автор: {book.Author}; Жанры: {book.Genres}; Дата публикации:" +
                                      $" {book.PublicationDate}; ISBN: {book.ISBN}. {annot}");
                 }
             }
@@ -55,7 +55,8 @@ public class BookView:IBookView
     public Book BookQuery()
     {
         var book = new Book();
-
+        var tempList = new List<string>();
+        
         Console.WriteLine("Введите название: ");
         var input = Console.ReadLine() ?? "";
         if (input == "")
@@ -68,11 +69,19 @@ public class BookView:IBookView
             throw new Exception("Пустая строка недопустима.");
         book.Author = input;
 
-        Console.WriteLine("Введите жанр книги: ");
-        input = Console.ReadLine() ?? "";
-        if (input == "")
+        while (true)
+        {
+            Console.WriteLine("Введите жанры книги: ");
+            input = Console.ReadLine() ?? "";
+            if (input == "")
+                break;
+            tempList.Add(input);
+
+        }
+
+        if (!tempList.Any())
             throw new Exception("Пустая строка недопустима.");
-        book.Genre = input;
+        book.Genres = tempList;
 
         Console.WriteLine("Введите дату публикации: ");
         input = Console.ReadLine() ?? "";
