@@ -6,7 +6,7 @@ namespace ConsoleApp3.DB;
 
 public class BookContext : DbContext
 {
-    public DbSet<Book> Books { get; set; }
+    public DbSet<Book>? Books { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
@@ -16,6 +16,11 @@ public class BookContext : DbContext
 
         optionsBuilder.UseSqlite(connection);
     }
+    
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Book>()
+            .Ignore(e => e.Genres);    }
 
     public void CreateBooksTable()
     {
