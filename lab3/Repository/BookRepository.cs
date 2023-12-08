@@ -53,7 +53,7 @@ public class BookRepository : IBookRepository
                 {
                     Title = book.Title,
                     Author = book.Author,
-                    Genre = book.Genre,
+                    Genres = book.Genres,
                     PublicationDate = book.PublicationDate,
                     Annotation = book.Annotation,
                     ISBN = book.ISBN
