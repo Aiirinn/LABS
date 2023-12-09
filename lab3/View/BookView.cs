@@ -2,19 +2,19 @@ using ConsoleApp3.Model;
 
 namespace ConsoleApp3.View;
 
-public class BookView:IBookView
+public class BookView : IBookView
 {
-
-    public  void DisplayBooksFull(List<Book> books) // Отображение информации о книгах
+    public void DisplayBooksFull(List<Book> books) // Отображение информации о книгах
     {
         foreach (var book in books)
         {
-            Console.WriteLine($"Название: {book.Title}; Автор: {book.Author}; Жанры: {String.Join(", ", book.Genres)}; Дата публикации:" +
-                              $" {book.PublicationDate}; Аннотация: {book.Annotation}; ISBN: {book.ISBN}");
+            Console.WriteLine(
+                $"Название: {book.Title}; Автор: {book.Author}; Жанры: {String.Join(", ", book.Genres)}; Дата публикации:" +
+                $" {book.PublicationDate}; Аннотация: {book.Annotation}; ISBN: {book.ISBN}");
         }
     }
-    
-    public  void DisplayBooksShort(List<Book> books, List<SortedBook> sortedBooks) // Отображение информации о книгах
+
+    public void DisplayBooksShort(List<Book> books, List<SortedBook> sortedBooks) // Отображение информации о книгах
     {
         foreach (var sortedBook in sortedBooks)
         {
@@ -25,14 +25,15 @@ public class BookView:IBookView
                     var annot = "";
                     if (sortedBook.IsKeywordInAnnotation)
                         annot = "Ключевое слово найдено в аннотации!";
-                    Console.WriteLine($"Название: {book.Title}; Автор: {book.Author}; Жанры: {book.Genres}; Дата публикации:" +
-                                     $" {book.PublicationDate}; ISBN: {book.ISBN}. {annot}");
+                    Console.WriteLine(
+                        $"Название: {book.Title}; Автор: {book.Author}; Жанры: {book.Genres}; Дата публикации:" +
+                        $" {book.PublicationDate}; ISBN: {book.ISBN}. {annot}");
                 }
             }
         }
     }
 
-    public  int GetMenuChoice() // Взаимодействие с пользователем для выбора пунктов меню
+    public int GetMenuChoice() // Взаимодействие с пользователем для выбора пунктов меню
     {
         Console.WriteLine(
             "Выберите действие:\n1. Добавление книги в каталог.\n2. Выборка информации по конкретной книге.\n3. Выход.");
@@ -43,7 +44,7 @@ public class BookView:IBookView
         return n;
     }
 
-    public  string SearchQuery()
+    public string SearchQuery()
     {
         Console.Write("Введите запрос: ");
         var input = Console.ReadLine() ?? "";
@@ -56,7 +57,7 @@ public class BookView:IBookView
     {
         var book = new Book();
         var tempList = new List<string>();
-        
+
         Console.WriteLine("Введите название: ");
         var input = Console.ReadLine() ?? "";
         if (input == "")
@@ -76,7 +77,6 @@ public class BookView:IBookView
             if (input == "")
                 break;
             tempList.Add(input);
-
         }
 
         if (!tempList.Any())
@@ -100,7 +100,6 @@ public class BookView:IBookView
         book.ISBN = input;
 
         return book;
-
     }
 
     public int SearchChoiceQuery()
