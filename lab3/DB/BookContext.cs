@@ -19,7 +19,6 @@ public class BookContext : DbContext
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Book>()
-            .Ignore(e => e.Genres);    }
-    
+        modelBuilder.Entity<Book>();
+    }
 }
