@@ -20,7 +20,6 @@ public class BookController
 
     public List<Book> Search(string keyword, int mode)
     {
-        var flag = false;
         var tempBooks = new List<Book>();
         foreach (var book in _books)
         {
@@ -29,7 +28,6 @@ public class BookController
                 case 1:
                     if (book.Title.ToLower() == keyword.ToLower())
                     {
-                        flag = true;
                         tempBooks.Add(book);
                     }
 
@@ -37,7 +35,6 @@ public class BookController
                 case 2:
                     if (book.Author.ToLower() == keyword.ToLower())
                     {
-                        flag = true;
                         tempBooks.Add(book);
                     }
 
@@ -45,7 +42,6 @@ public class BookController
                 case 3:
                     if (book.ISBN.ToLower() == keyword.ToLower())
                     {
-                        flag = true;
                         tempBooks.Add(book);
                     }
 
@@ -53,7 +49,7 @@ public class BookController
             }
         }
 
-        if (flag == false)
+        if (tempBooks.Count == 0)
             Console.WriteLine("По вашему запросу ничего не найдено");
         return tempBooks;
     }
@@ -61,7 +57,6 @@ public class BookController
 
     public List<SortedBook> SearchByKeywords(List<string> keywords) // Реализация поиска по ключевым словам
     {
-        var flag = false; // флаг
         var tempArray = new List<SortedBook>(); // вспомогательный список
         foreach (var book in _books)
         {
@@ -80,7 +75,6 @@ public class BookController
 
                 if (counter > 0)
                 {
-                    flag = true;
                     sortedBook.Counter = counter;
                     sortedBook.Title = book.Title;
                 }
@@ -89,9 +83,11 @@ public class BookController
             tempArray.Add(sortedBook);
         }
 
-        if (flag == false)
+        if (tempArray.Count==0)
             Console.WriteLine("По вашему запросу ничего не найдено");
-        tempArray.Sort((b1, b2) => b2.Counter.CompareTo(b1.Counter));
+        else
+            tempArray.Sort((b1, b2) => b2.Counter.CompareTo(b1.Counter));
+        
         return tempArray;
     }
 
@@ -112,6 +108,7 @@ public class BookController
                 _books = _bookRepository.LoadFromJson();
                 break;
         }
+
         var running = true;
         while (true)
         {
@@ -163,6 +160,7 @@ public class BookController
                         _bookRepository.SaveToJson(_books);
                         break;
                 }
+
                 break;
             }
         }
