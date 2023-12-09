@@ -21,15 +21,5 @@ public class BookContext : DbContext
     {
         modelBuilder.Entity<Book>()
             .Ignore(e => e.Genres);    }
-
-    public void CreateBooksTable()
-    {
-        using (var context = new BookContext())
-        {
-            context.Database.OpenConnection();
-            context.Database.ExecuteSqlRaw("CREATE TABLE IF NOT EXISTS Books (Id INTEGER PRIMARY KEY AUTOINCREMENT, Title TEXT, Author TEXT, Genre TEXT, PublicationDate DATETIME, Annotation TEXT, ISBN TEXT)");
-
-            context.Database.CloseConnection();
-        }
-    }
+    
 }
