@@ -1,4 +1,5 @@
 using ConsoleApp3.Model;
+using Microsoft.VisualBasic;
 
 namespace ConsoleApp3.View;
 
@@ -9,7 +10,7 @@ public class BookView : IBookView
         foreach (var book in books)
         {
             Console.WriteLine(
-                $"Название: {book.Title}; Автор: {book.Author}; Жанры: {String.Join(", ", book.Genres)}; Дата публикации:" +
+                $"Название: {book.Title}; Автор: {book.Author}; Жанры: {book.Genres.Replace(" ", ", ")}; Дата публикации:" +
                 $" {book.PublicationDate}; Аннотация: {book.Annotation}; ISBN: {book.ISBN}");
         }
     }
@@ -69,19 +70,12 @@ public class BookView : IBookView
         if (input == "")
             throw new Exception("Пустая строка недопустима.");
         book.Author = input;
-
-        while (true)
-        {
-            Console.WriteLine("Введите жанры книги: ");
-            input = Console.ReadLine() ?? "";
-            if (input == "")
-                break;
-            tempList.Add(input);
-        }
-
-        if (!tempList.Any())
+        
+        Console.WriteLine("Введите жанры книги через пробел: ");
+        input = Console.ReadLine() ?? "";
+        if (input == "")
             throw new Exception("Пустая строка недопустима.");
-        book.Genres = tempList;
+        book.Genres = input;
 
         Console.WriteLine("Введите дату публикации: ");
         input = Console.ReadLine() ?? "";
