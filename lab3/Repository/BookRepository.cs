@@ -10,56 +10,49 @@ public class BookRepository : IBookRepository
     private readonly string _jsonFilePath =
         Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "books.json");
 
-    private BookContext _context = new ();
+    private readonly BookContext _context = new();
 
     public void SaveToDb(List<Book> books)
     {
-        _context.Database.EnsureCreated(); // Создать базу данных, если её нет
         _context.Database.ExecuteSqlRaw("DELETE FROM Books");
-        foreach (var book in books)
-        {
-            _context.Books.Add(book);
-        }
+        _context.Books.AddRange(books);
 
         _context.SaveChanges();
     }
 
     public List<Book> LoadFromDb()
     {
-        _context.CreateBooksTable();
+        _context.Database.EnsureCreated();
         return _context.Books.ToList();
     }
 
     public void SaveToJson(List<Book> books)
     {
-        File.WriteAllText(_jsonFilePath, string.Empty);
         var jsonData = JsonConvert.SerializeObject(books, Formatting.Indented);
         File.WriteAllText(_jsonFilePath, jsonData);
     }
 
     public List<Book> LoadFromJson()
     {
-        List<Book> temp=new List<Book>();
-        if (!File.Exists(_jsonFilePath))
-            File.Create(_jsonFilePath).Close();
-        else
+        List<Book> temp = new List<Book>();
+        File.Create(_jsonFilePath).Close();
+
+        var jsonData = File.ReadAllText(_jsonFilePath);
+        var data = JsonConvert.DeserializeObject<List<Book>>(jsonData) ??
+                   new List<Book>();
+        foreach (var book in data)
         {
-            var jsonData = File.ReadAllText(_jsonFilePath);
-            var data = JsonConvert.DeserializeObject<List<Book>>(jsonData) ??
-                       new List<Book>();
-            foreach (var book in data)
+            temp.Add(new Book
             {
-                temp.Add(new Book
-                {
-                    Title = book.Title,
-                    Author = book.Author,
-                    Genres = book.Genres,
-                    PublicationDate = book.PublicationDate,
-                    Annotation = book.Annotation,
-                    ISBN = book.ISBN
-                });
-            }
+                Title = book.Title,
+                Author = book.Author,
+                Genres = book.Genres,
+                PublicationDate = book.PublicationDate,
+                Annotation = book.Annotation,
+                ISBN = book.ISBN
+            });
         }
+
         return temp;
     }
 }
