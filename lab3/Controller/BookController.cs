@@ -83,11 +83,11 @@ public class BookController
             tempArray.Add(sortedBook);
         }
 
-        if (tempArray.Count==0)
+        if (tempArray.Count == 0)
             Console.WriteLine("По вашему запросу ничего не найдено");
         else
             tempArray.Sort((b1, b2) => b2.Counter.CompareTo(b1.Counter));
-        
+
         return tempArray;
     }
 
