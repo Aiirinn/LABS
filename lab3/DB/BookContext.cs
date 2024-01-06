@@ -8,17 +8,16 @@ public class BookContext : DbContext
 {
     public DbSet<Book>? Books { get; set; }
 
+    
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        var connectionStringBuilder = new SqliteConnectionStringBuilder { DataSource = "bookstore.db" };
-        var connectionString = connectionStringBuilder.ToString();
-        var connection = new SqliteConnection(connectionString);
-
-        optionsBuilder.UseSqlite(connection);
+        optionsBuilder.UseSqlite("Data Source=BookStore.db");
     }
     
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.Entity<Book>();
     }
+        
+    
 }
