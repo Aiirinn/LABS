@@ -1,0 +1,28 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:ConsoleApp5.ViewModels"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+        x:Class="ConsoleApp5.Views.DialogAddWindow"
+        x:DataType="viewModels:DialogAddViewModel"
+        Title="DialogWindow" Width="220" Height="800">
+        
+        <StackPanel>
+                <Label>Title</Label>
+                <TextBox Text="{Binding Title}" Width="200" Height="50" Margin="0 10 0 0 " Name="Title"></TextBox>
+                <Label>Author</Label>
+                <TextBox Text="{Binding Author}" Width="200" Height="50" Margin="0 10 0 0 " Name="Author"></TextBox>
+                <Label>Genre</Label>
+                <TextBox Text="{Binding Genre}" Width="200" Height="50" Margin="0 10 0 0 " Name="Genre"></TextBox>
+                <Label>Publication Date</Label>
+                <TextBox Text="{Binding PublicationYear}" Width="200" Height="50" Margin="0 10 0 0 " Name="PublicationDate"></TextBox>
+                <Label>Annotation</Label>
+                <TextBox Text="{Binding Annotation}" Width="200" Height="50" Margin="0 10 0 0 " Name="Annotation"></TextBox>
+                <Label>ISBN</Label>
+                <TextBox Text="{Binding ISBN}" Width="200" Height="50" Margin="0 10 0 0 " Name="ISBN"></TextBox>
+                
+                <Button Width="200" Height="100" Margin="10" Command="{Binding ConfirmAction}"
+                        VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Name="OkButton">OK</Button>
+        </StackPanel>
+</Window>
